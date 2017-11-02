@@ -9,6 +9,7 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js')
+    script(src="https://use.fontawesome.com/a5b472d57a.js")
   body
     block top-nav
       include ./includes/topnav
@@ -23,5 +24,5 @@ html
               span(aria-hidden='true') &times;
     block content
 
-    //- block footer
-    //-   include ./includes/footer
+    block footer
+      include ./includes/footer

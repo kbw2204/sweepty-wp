@@ -1,8 +1,28 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  
+  font: font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;; 
+}
 
 a {
   color: #00B7FF; }
+
+img {
+ 	width: 100%;
+ 	height: 15%;
+ }
+ .footer {
+ 	/*background-color: black;*/
+ 	/*color: white;*/
+ 	letter-spacing: 0.1em;
+ 	padding: 1em;
+ }
+
+ .footer li {
+ 	list-style: none;
+ 	padding: 0.5em;
+ }
+ #botton_menu {
+ 	display: inline;
+ }
 
 /*# sourceMappingURL=style.css.map */

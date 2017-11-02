@@ -1,5 +1,17 @@
 extends layout
 
 block content
-	p 안녕
+	.carouselSlide(data-ride="carousel")
+		.carousel-inner
+			.carousel-item.active
+				img.d-block.w-50(src="images/team.jpg",alt="First slide")
+			.carousel-item
+				img.d-block.w-50(src="images/music.jpg", alt="Second slide")
+			.carousel-item
+				img.d-block.w-50(src="images/sports.jpg", alt="Third slide")
+
+	.container#cards
+		.row
+			.col-lg-4.col-md-6.col-sm-12
+				
 
