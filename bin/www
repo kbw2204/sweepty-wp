@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('sweepty-wp:server');
+var debug = require('debug')('ex01:server');
 var http = require('http');
 
 /**
