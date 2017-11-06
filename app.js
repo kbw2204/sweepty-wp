@@ -12,7 +12,7 @@ var mongoose   = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var questions = require('./routes/questions');
+// var questions = require('./routes/events');
 
 var app = express();
 
@@ -37,8 +37,6 @@ const connStr = 'mongodb://localhost/mjdb';
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
 
-// Favicon은 웹사이트의 대표 아이콘입니다. Favicon을 만들어서 /public에 둡시다.
-// https://www.favicon-generator.org/ 여기서 만들어볼 수 있어요.
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -79,7 +77,7 @@ app.use(function(req, res, next) {
 // Route
 app.use('/', index);
 app.use('/users', users);
-app.use('/questions', questions);
+// app.use('/questions', questions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
