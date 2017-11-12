@@ -1,0 +1,60 @@
+.form-group
+  label(for="title") Title
+  input.form-control(type="text", name="title", placeholder="Name of Event", value=event.title)
+.form-group
+  label(for="eventtype") Event Type
+  select#eventtype.form-control
+    option 교육/강연
+    option 전시/박람회
+    option 세미나/컨퍼런스
+    option 문화/예술
+    option 소모임
+    option 기타
+.form-group
+  label(for="eventtopic") Event Topic
+  select#eventtype.form-control
+    option 과학/기술
+    option 취미
+    option 음악
+    option 미술
+    option 라이프스타일
+    option 비즈니스
+    option 스포츠
+    option 여행
+    option 기타
+  
+
+//- .form-group
+//- 	div(style="overflow:hidden;")
+//- 		.form-group
+//- 			.row
+//- 				.col-md-8
+//- 					#datetimepicker12script(type="text/javascript").
+//- 				$(function () {
+//- 				$('#datetimepicker12').datetimepicker({
+//- 				inline: true,
+//- 				sideBySide: true
+//- 				});
+//- 				});		
+
+.form-group
+  label(for="exampleFormControlFile1") 파일 첨부
+  input#exampleFormControlFile1.form-control-file(type="file")
+
+
+//-완성된 기능		
+.form-group
+  label(for="event") Contents
+  textarea.form-control(name="content", rows="10")= event.content
+.form-group
+  label(for="tags") Tags
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")
+
+//-필수 정보를 입력할 수 있다: 이벤트의 이름, 장소, 시작시간, 종료시간, 상세 설명, 등록 조직 이름, 등록 조직 설명
+//-[ ] 이벤트의 종류와 분야를 선택할 수 있다.
+//-[ ] 무료 행사인지, 유료 행사인지를 결정하여 유료 행사의 경우 티켓 가격을 입력받는다.
+//-(option) 이벤트 관련 사진을 여러장 입력할 수 있다.
+//-(option) 상세 설명을 WYSIWYG에디터를 이용하여 입력받는다. (TinyMCE 등 활용 가능)
+//-(option) 장소를 맵을 이용하여 입력받을 수 있다.
+//-(option) 최대 참가 인원을 설정할 수 있다.
+//-(option) 참여인원에게 간단한 설문 (소속, 참여 이유 등)을 진행할 수 있다.
