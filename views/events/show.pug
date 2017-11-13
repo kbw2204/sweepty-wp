@@ -1,6 +1,19 @@
 extends ../layout
 
 block content
+  //- nav#myTab.nav.nav-tabs(role="tablist")
+  //- a#nav-home-tab.nav-item.nav-link.active(data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true") Home
+  //- a#nav-profile-tab.nav-item.nav-link(data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false") Profile
+  //- a#nav-contact-tab.nav-item.nav-link(data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false") Contact
+  //- #nav-tabContent.tab-content
+  //-   #nav-home.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="nav-home-tab")
+  //-     block show_event
+  //-       include /show_event
+  //-   #nav-profile.tab-pane.fade(role="tabpanel" aria-labelledby="nav-profile-tab") 
+  //-     block show_qanda
+  //-       include /_qanda
+  //-   #nav-contact.tab-pane.fade(role="tabpanel" aria-labelledby="nav-contact-tab") ...
+
   .container
     h1.main-title= events.title
 

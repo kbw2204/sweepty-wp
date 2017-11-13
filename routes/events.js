@@ -7,7 +7,7 @@ const router = express.Router();
 
 // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
 function needAuth(req, res, next) {
-    if (req.session.user) {
+    if (req.isAuthenticated()) {
       next();
     } else {
       req.flash('danger', 'Please signin first.');
@@ -76,7 +76,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
+  const user = req.user;
   var event = new Events({
     title: req.body.title,
     author: user._id,
@@ -106,7 +106,7 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   // 많은 사람이 들어왔을 때가 문제 들어왔을 땐 0이었는데 그 때 두사람이 들어온 경우.... 
   //근데 우리꺼에서는 신경쓰지 않겠다.
   // await comment.save();
-  event.numAnswers++;
+  // event.numAnswers++;
   await event.save();
 
   req.flash('success', 'Successfully answered');

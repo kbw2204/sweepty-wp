@@ -1,51 +1,37 @@
 .form-group
   label(for="title") Title
   input.form-control(type="text", name="title", placeholder="Name of Event", value=event.title)
-.form-group
-  label(for="eventtype") Event Type
-  select#eventtype.form-control
-    option 교육/강연
-    option 전시/박람회
-    option 세미나/컨퍼런스
-    option 문화/예술
-    option 소모임
-    option 기타
-.form-group
-  label(for="eventtopic") Event Topic
-  select#eventtype.form-control
-    option 과학/기술
-    option 취미
-    option 음악
-    option 미술
-    option 라이프스타일
-    option 비즈니스
-    option 스포츠
-    option 여행
-    option 기타
-  
+//- .form-group
+//-   label(for="eventtype") Event Type
+//-   select#eventtype.form-control
+//-     option 교육/강연
+//-     option 전시/박람회
+//-     option 세미나/컨퍼런스
+//-     option 문화/예술
+//-     option 소모임
+//-     option 기타
+//- .form-group
+//-   label(for="eventtopic") Event Topic
+//-   select#eventtype.form-control
+//-     option 과학/기술
+//-     option 취미
+//-     option 음악
+//-     option 미술
+//-     option 라이프스타일
+//-     option 비즈니스
+//-     option 스포츠
+//-     option 여행
+//-     option 기타	
 
 //- .form-group
-//- 	div(style="overflow:hidden;")
-//- 		.form-group
-//- 			.row
-//- 				.col-md-8
-//- 					#datetimepicker12script(type="text/javascript").
-//- 				$(function () {
-//- 				$('#datetimepicker12').datetimepicker({
-//- 				inline: true,
-//- 				sideBySide: true
-//- 				});
-//- 				});		
+//-   label(for="exampleFormControlFile1") 파일 첨부
+//-   input#exampleFormControlFile1.form-control-file(type="file")
 
-.form-group
-  label(for="exampleFormControlFile1") 파일 첨부
-  input#exampleFormControlFile1.form-control-file(type="file")
-
-
-//-완성된 기능		
 .form-group
   label(for="event") Contents
   textarea.form-control(name="content", rows="10")= event.content
+.form-group
+  
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")

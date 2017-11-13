@@ -25,8 +25,10 @@
               a.nav-link.dropdown-toggle(data-toggle="dropdown", href="#", role="button", aria-haspopup="true", aria-expanded="false") Users
                 .dropdown-menu
                   //- a.dropdown-item(href=`/users/${currentUser._id/tickets}`) tickets
-                  a.dropdown-item(href="#") star
+                  a.dropdown-item(href="#") <i class="fa fa-star" aria-hidden="true"></i> stars
+                  a.dropdown-item(href="#") <i class="fa fa-ticket" aria-hidden="true"></i> tickets
                   a.dropdown-item(href="/signout") sign out
+
             //- li.nav-item
             //-   a.nav-link(href='/signout') Sign out
 

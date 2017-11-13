@@ -11,17 +11,18 @@ var schema = new Schema({
   tags: [String],
   numLikes: {type: Number, default: 0},
   // numAnswers: {type: Number, default: 0},
-  place: {type:String,trim: true, required: true},
-  starttime: {type: Date},
-  endtime: {type: Date},
-  eventtype : {type: String,trim: true, required: true},
-  eventtopic: {type: String,trim: true, required: true},
+  // place: {type:String,trim: true, required: true},
+  // starttime: {type: Date},
+  // endtime: {type: Date},
+  // eventtype : {type: String,trim: true, required: true},
+  // eventtopic: {type: String,trim: true, required: true},
   numReads: {type: Number, default: 0},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},
   toObject: {virtuals: true}
 });
+
 schema.plugin(mongoosePaginate);//mongoosePaginate 함수를 추가해주는 기능.
 var Event = mongoose.model('Event', schema); 
 
