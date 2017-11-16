@@ -7,7 +7,7 @@ const router = express.Router();
 
 // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
 function needAuth(req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated()|| (req.session.user)){
       next();
     } else {
       req.flash('danger', 'Please signin first.');
@@ -64,6 +64,7 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   event.content = req.body.content;
   event.tags = req.body.tags.split(" ").map(e => e.trim());
 
+
   await event.save();
   req.flash('success', 'Successfully updated');
   res.redirect('/events');
@@ -76,12 +77,17 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.user;
+  const user = req.session.user; //du
   var event = new Events({
     title: req.body.title,
-    author: user._id,
+    author: user.o_id,
     content: req.body.content,
     tags: req.body.tags.split(" ").map(e => e.trim()),
+    cost: req.body.cost,
+    group_name: req.body.group_name,
+    about_group : req.body.about_group,
+    eventtype : req.body.eventtype,
+    eventtopic: req.body.eventtopic,
   });
   await event.save();
   req.flash('success', 'Successfully posted');

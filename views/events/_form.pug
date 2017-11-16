@@ -1,40 +1,65 @@
 .form-group
   label(for="title") Title
   input.form-control(type="text", name="title", placeholder="Name of Event", value=event.title)
-//- .form-group
-//-   label(for="eventtype") Event Type
-//-   select#eventtype.form-control
-//-     option 교육/강연
-//-     option 전시/박람회
-//-     option 세미나/컨퍼런스
-//-     option 문화/예술
-//-     option 소모임
-//-     option 기타
-//- .form-group
-//-   label(for="eventtopic") Event Topic
-//-   select#eventtype.form-control
-//-     option 과학/기술
-//-     option 취미
-//-     option 음악
-//-     option 미술
-//-     option 라이프스타일
-//-     option 비즈니스
-//-     option 스포츠
-//-     option 여행
-//-     option 기타	
+.form-group
+  label(for="group_name") Group Name
+  input.form-control(type="text", name="group_name", placeholder="Name of Group", value=event.group_name)
+.form-group
+  label(for="about_group") About Group
+  textarea.form-control(name="about_group", rows="2", value= event.about_group)
 
-//- .form-group
-//-   label(for="exampleFormControlFile1") 파일 첨부
-//-   input#exampleFormControlFile1.form-control-file(type="file")
+.form-group
+  label(for="eventtype") Event Type
+  select.form-control(name="eventtype") = event.eventtype
+    option 교육/강연
+    option 전시/박람회
+    option 세미나/컨퍼런스
+    option 문화/예술
+    option 소모임
+    option 기타
+
+.form-group
+  label(for="eventtopic") Event Topic
+  select.form-control(name="eventtopic")=event.eventtopic
+    option 과학/기술
+    option 취미
+    option 음악
+    option 미술
+    option 라이프스타일
+    option 비즈니스
+    option 스포츠
+    option 여행
+    option 기타	
+.container
+  .row
+    .col-12
+      label(for="cost") 이벤트 가격
+    .col-6
+      .form-check
+        label.form-check-label
+          input#costFree.form-check-input(type="radio" name="exampleRadios" checked="")
+          |             FREE
+
+    .col-6
+      .form-check
+        .input-group
+          span.input-group-addon
+            input#cost(type="radio" name="exampleRadios")
+          input.form-control(type="text" aria-label="How about the cost?" value =event.cost)
+          span.input-group-addon 원
 
 .form-group
   label(for="event") Contents
   textarea.form-control(name="content", rows="10")= event.content
-.form-group
-  
+
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")
+
+//- //- .form-group
+//-   label(for="exampleFormControlFile1") 파일 첨부
+//-   input#exampleFormControlFile1.form-control-file(type="file") = event.photo
+
 
 //-필수 정보를 입력할 수 있다: 이벤트의 이름, 장소, 시작시간, 종료시간, 상세 설명, 등록 조직 이름, 등록 조직 설명
 //-[ ] 이벤트의 종류와 분야를 선택할 수 있다.

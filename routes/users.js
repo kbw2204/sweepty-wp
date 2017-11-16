@@ -39,7 +39,6 @@ function validateForm(form, options) {
 
   return null;
 }
-
 /* GET users listing. */
 router.get('/', needAuth, (req, res, next) => {
   User.find({}, function(err, users) {

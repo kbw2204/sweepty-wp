@@ -10,12 +10,18 @@ var schema = new Schema({
   content: {type: String, trim: true, required: true},
   tags: [String],
   numLikes: {type: Number, default: 0},
+  // photo: 
   // numAnswers: {type: Number, default: 0},
   // place: {type:String,trim: true, required: true},
   // starttime: {type: Date},
   // endtime: {type: Date},
-  // eventtype : {type: String,trim: true, required: true},
-  // eventtopic: {type: String,trim: true, required: true},
+  // stars : {type: Number, default: 0},
+  
+  cost: {type: Number, default:0},
+  group_name : {type: String,trim: true, required: true},
+  about_group : {type: String,trim: true, required: true},
+  eventtype : {type: String,trim: true, required: true},
+  eventtopic: {type: String,trim: true, required: true},
   numReads: {type: Number, default: 0},
   createdAt: {type: Date, default: Date.now}
 }, {
