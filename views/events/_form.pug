@@ -10,7 +10,7 @@
 
 .form-group
   label(for="eventtype") Event Type
-  select.form-control(name="eventtype") = event.eventtype
+  select.form-control(name="eventtype", value = event.eventtype)
     option 교육/강연
     option 전시/박람회
     option 세미나/컨퍼런스
@@ -20,7 +20,7 @@
 
 .form-group
   label(for="eventtopic") Event Topic
-  select.form-control(name="eventtopic")=event.eventtopic
+  select.form-control(name="eventtopic", value=event.eventtopic)
     option 과학/기술
     option 취미
     option 음악

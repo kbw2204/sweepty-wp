@@ -14,9 +14,6 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var events = require('./routes/events');
 
-// var BSON = require('mongodb').BSONNative;
-// var o_id = BSON.ObjectID.createFromHexString(theidID);
-// var tickets = require('./routes/tickets');
 var passportConfig = require('./lib/passport-config');
 
 var app = express();
@@ -75,7 +72,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // pug의 local에 현재 사용자 정보와 flash 메시지를 전달하자.
 app.use(function(req, res, next) {
   // res.locals.currentUser = req.session.user;
-  res.locals.currentUser = req.user;
+  // // res.locals.currentUser = req.user;
+  // res.locals.flashMessages = req.flash();
+  // next();
+  if (req.isAuthenticated()) {
+    res.locals.currentUser = req.user;
+  } else if (req.session.user) {
+    res.locals.currentUser = req.session.user;
+  } else {}
   res.locals.flashMessages = req.flash();
   next();
 });
