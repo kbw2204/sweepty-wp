@@ -4,43 +4,23 @@ block content
   .container
     h1.main-title= event.title
 
-    button.btn.btn-primary.btn-block(href="#") 참가하기
+    .buttons
+      button.btn.btn-primary.btn-block(href="#") 참가하기
+      button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
+      | 
+      a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
+      | 
+      a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/events/${event.id}?_method=delete`) Delete
+    include _event
+    ul#myTab.nav.nav-tabs(role="tablist")
+      li.nav-item
+        a#home-tab.nav-link.active(data-toggle="tab" href="#about" role="tab" aria-controls="home" aria-selected="true") 모임 상세 정보
+      li.nav-item
+        a#profile-tab.nav-link(data-toggle="tab" href="#comment" role="tab" aria-controls="profile" aria-selected="false") Q&amp;A
+    #myTabContent.tab-content
+      #about.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="home-tab")
+        include about_event
+      #comment.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
+        //- include _comment
+        h1 하이
 
-    .event.show
-      .group_name= event.group_name
-      .about_group= event.about_group
-      .eventtype= event.eventtype
-      .eventtopic= event.eventtopic
-      .cost= event.cost
-      .content= event.content
-      include _event
-
-      .buttons
-        button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
-        | 
-        a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
-        | 
-        a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/events/${event.id}?_method=delete`) Delete
-      
-    //- if events.numAnswer > 0
-    //-   hr
-    //-   h3 #{events.num} Answer(s)
-    //-   .answers.show
-    //-     each answer in answers
-    //-       include _answer
-
-    //- form(action=`/events/${event.id}/answers`, method='POST')
-    //-   .form-group
-    //-     label(for='answer') Your Answer
-    //-     textarea.form-control(name="content", rows="5")
-    //-   button.btn.btn-primary(type="submit") Post Your Answer
-
-  script.
-    $(function() {
-      $('.delete-btn').click(function() {
-        if (confirm('Are you sure to delete?')) {
-          location = $(this).data('url');
-        }
-        return false;
-      });
-    });
