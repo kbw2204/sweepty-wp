@@ -1,0 +1,18 @@
+.event.show
+  .group_name= event.group_name
+  .about_group= event.about_group
+  .eventtype= event.eventtype
+  .eventtopic= event.eventtopic
+  .cost= event.cost
+  .content= event.content
+  //- include _event
+
+  script.
+    $(function() {
+      $('.delete-btn').click(function() {
+        if (confirm('Are you sure to delete?')) {
+          location = $(this).data('url');
+        }
+        return false;
+      });
+    });
