@@ -1,3 +1,4 @@
+
 .form-group
   label(for="title") Title
   input.form-control(type="text", name="title", placeholder="Name of Event", value=event.title)
@@ -38,18 +39,29 @@
 .form-group
   label(for="place") 장소
   input.form-control(type="text", name="place", placeholder="", value=event.place)
-
-.container
-  .row
-    .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
-      .content
-        h1 DateTimePicker Styles
-        label Date &amp; Time
-        #datetimepicker.input-group.date-time
-          input.form-control
-          span.input-group-addon
-            span.fa.fa-calendar
-
+//- .form-group
+//-   include untitled
+//- .form-group
+//-   input.form-control(type="text",name="starttime", value=event.starttime)
+//- script.
+//-   $('#sandbox-container input').datepicker({
+//-     maxViewMode: 2,
+//-     todayBtn: true,
+//-     language: "kr",
+//-     autoclose: true,
+//-     todayHighlight: true
+//-   });
+input(type='text', name='daterange', value='')
+script(type='text/javascript').
+  $(function() {
+    $('input[name="daterange"]').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+      format: 'MM/DD/YYYY h:mm A'
+    }
+  });
+  });
 .container
   .row
     .col-12

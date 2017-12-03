@@ -82,12 +82,16 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   event.title = req.body.title;
   event.content = req.body.content;
   event.tags = req.body.tags.split(" ").map(e => e.trim());
-
-  // event.cost = req.body.cost,
-  // event.group_name: req.body.group_name,
-  // event.about_group : req.body.about_group,
-  // event.eventtype : req.body.eventtype,
-  // event.eventtopic: req.body.eventtopic;
+  event.cost = req.body.cost,
+  event.group_name = req.body.group_name,
+  event.about_group = req.body.about_group,
+  event.place = req.body.place,
+  event.starttime = req.body.starttime,
+  event.endtime = req.body.endtime,
+  event.total_p_num = req.body.total_p_num,
+  // event. = req.body,
+  event.eventtype = req.body.eventtype,
+  event.eventtopic = req.body.eventtopic;
 
   await event.save();
   req.flash('success', 'Successfully updated');
@@ -109,12 +113,14 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     tags: req.body.tags.split(" ").map(e => e.trim()),
     cost: req.body.cost,
     pnum: req.body.total_p_num,
+    starttime: req.body.starttime,
+    endtime: req.body.endtime,
+    place: req.body.place,
     group_name: req.body.group_name,
     about_group: req.body.about_group,
     eventtype: req.body.eventtype,
     eventtopic: req.body.eventtopic,
   });
-
   await event.save();
   req.flash('success', 'Successfully posted');
   res.redirect('/events');

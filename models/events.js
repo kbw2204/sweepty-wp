@@ -9,17 +9,17 @@ var schema = new Schema({
   tags: [String],
   numLikes: {type: Number, default: 0},
   // numAnswers: {type: Number, default: 0},
-  // place: {type:String,trim: true, required: true},
-  // starttime: {type: Date},
-  // endtime: {type: Date},
+  place: {type:String,trim: true, required: true},
+  starttime: {type: Date,required: true},
+  endtime: {type: Date,required: true},
   // stars : {type: Number, default: 0},
-  total_p_num: {type:Number},
-  cost: {type: Number},
+  total_p_num: {type:Number,required:true},
+  cost: {type: Number,required:true},
   group_name : {type: String,trim: true, required: true},
   about_group : {type: String,trim: true, required: true},
   eventtype : {type: String,trim: true, required: true},
   eventtopic: {type: String,trim: true, required: true},
-  
+
   members: [{type: Schema.Types.ObjectId, ref: 'User'}],
   numReads: {type: Number, default: 0},
   createdAt: {type: Date, default: Date.now}
