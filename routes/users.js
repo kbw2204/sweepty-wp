@@ -47,6 +47,19 @@ router.get('/', needAuth, (req, res, next) => {
     if (err) {
       return next(err);
     }
+  //   User.findById(req.params.id, function(err, user) {
+  //     if (err) {
+  //       return next(err);
+  //     }
+  //     if (user._id=='5a2199ca3a84f50d51bf3c68'){
+  //       res.render('users/index', {users: users});
+  //     }
+  //     else{
+  //       req.flash('관리자만 가능합니다!!');
+  //     }
+    
+  // });
+
     res.render('users/index', {users: users});
   }); // TODO: pagination?
 });

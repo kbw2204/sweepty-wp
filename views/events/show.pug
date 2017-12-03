@@ -5,7 +5,8 @@ block content
     h1.main-title= event.title
 
     .buttons
-      button.btn.btn-primary.btn-block(href="#") 참가하기
+      a.btn.btn-primary.btn-block(href=`/events/${event.id}/participate`) 참가하기
+      //- a.btn.btn-primary.btn-block(data-url=`/events/${event.id}?_method=post`) 참가하기
       button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
       | 
       a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
@@ -16,11 +17,17 @@ block content
       li.nav-item
         a#home-tab.nav-link.active(data-toggle="tab" href="#about" role="tab" aria-controls="home" aria-selected="true") 모임 상세 정보
       li.nav-item
-        a#profile-tab.nav-link(data-toggle="tab" href="#comment" role="tab" aria-controls="profile" aria-selected="false") Q&amp;A
+        a#qanda-tab.nav-link(data-toggle="tab" href="#comment" role="tab" aria-controls="q&a" aria-selected="false") Q&amp;A
+      li.nav-item
+        a#review-tab.nav-link(data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false") 후기
+          
     #myTabContent.tab-content
       #about.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="home-tab")
         include about_event
       #comment.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
         //- include _comment
-        h1 하이
+        h1 큐앤에이
+      #review.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
+        h1 리뷰입니다.
+
 

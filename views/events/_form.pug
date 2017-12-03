@@ -7,40 +7,60 @@
 .form-group
   label(for="about_group") About Group
   textarea.form-control(name="about_group", rows="2", value= event.about_group)
-
+.container
+  .row
+    .col-6
+      .form-group
+        label(for="eventtype") Event Type
+        select.form-control(name="eventtype", value = event.eventtype)
+          option 교육/강연
+          option 전시/박람회
+          option 세미나/컨퍼런스
+          option 문화/예술
+          option 소모임
+          option 기타
+    .col-6
+      .form-group
+        label(for="eventtopic") Event Topic
+        select.form-control(name="eventtopic", value=event.eventtopic)
+          option 과학/기술
+          option 취미
+          option 음악
+          option 미술
+          option 라이프스타일
+          option 비즈니스
+          option 스포츠
+          option 여행
+          option 기타	
 .form-group
-  label(for="eventtype") Event Type
-  select.form-control(name="eventtype", value = event.eventtype)
-    option 교육/강연
-    option 전시/박람회
-    option 세미나/컨퍼런스
-    option 문화/예술
-    option 소모임
-    option 기타
-
+  label(for="p_num") 참가 가능 인원
+  input.form-control(type="text", name="total person number", placeholder="", value=event.total_p_num)
 .form-group
-  label(for="eventtopic") Event Topic
-  select.form-control(name="eventtopic", value=event.eventtopic)
-    option 과학/기술
-    option 취미
-    option 음악
-    option 미술
-    option 라이프스타일
-    option 비즈니스
-    option 스포츠
-    option 여행
-    option 기타	
+  label(for="place") 장소
+  input.form-control(type="text", name="place", placeholder="", value=event.place)
+
+.container
+  .row
+    .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+      .content
+        h1 DateTimePicker Styles
+        label Date &amp; Time
+        #datetimepicker.input-group.date-time
+          input.form-control
+          span.input-group-addon
+            span.fa.fa-calendar
+
 .container
   .row
     .col-12
       label(for="cost") 이벤트 가격
-    .col-6
+    .col-3
       .form-check
         label.form-check-label
-          input#costFree.form-check-input(type="radio" name="exampleRadios" checked="")
+          input#costFree.form-check-input(type="radio" name="exampleRadios" checked="" value =event.cost)
           |             FREE
 
-    .col-6
+    .col-3
       .form-check
         .input-group
           span.input-group-addon
@@ -49,24 +69,10 @@
           span.input-group-addon 원
 
 .form-group
-  label(for="event") Contents
+  label(for="content") Contents
   textarea.form-control(name="content", rows="10")= event.content
 
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")
 
-
-//- //- .form-group
-//-   label(for="exampleFormControlFile1") 파일 첨부
-//-   input#exampleFormControlFile1.form-control-file(type="file") = event.photo
-
-
-//-필수 정보를 입력할 수 있다: 이벤트의 이름, 장소, 시작시간, 종료시간, 상세 설명, 등록 조직 이름, 등록 조직 설명
-//-[ ] 이벤트의 종류와 분야를 선택할 수 있다.
-//-[ ] 무료 행사인지, 유료 행사인지를 결정하여 유료 행사의 경우 티켓 가격을 입력받는다.
-//-(option) 이벤트 관련 사진을 여러장 입력할 수 있다.
-//-(option) 상세 설명을 WYSIWYG에디터를 이용하여 입력받는다. (TinyMCE 등 활용 가능)
-//-(option) 장소를 맵을 이용하여 입력받을 수 있다.
-//-(option) 최대 참가 인원을 설정할 수 있다.
-//-(option) 참여인원에게 간단한 설문 (소속, 참여 이유 등)을 진행할 수 있다.

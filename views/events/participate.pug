@@ -1,0 +1,11 @@
+block content
+  .container
+    h1.main-title 참가신청
+      form(action=`/events/${event.id}/participate`, method="POST")
+        .form-group
+          label(for="company") 소속
+          input.form-control(type="text", name="company", placeholder="")
+        .form-group
+          label(for="company") 참여이유
+          input.form-control(type="text", name="reason", placeholder="")
+          button.btn.btn-primary(type='submit') 참가신청하기

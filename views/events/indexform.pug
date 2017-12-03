@@ -1,0 +1,19 @@
+extends ../layout
+
+include ../includes/_paginate
+block content
+  .card(style='width: 20rem;')
+    .card-body
+      h4.card-title 
+       a.title(href=`/events/${event._id}`)= event.title
+      h6.card-subtitle.mb-2.text-muted
+      	.tags.badges
+  		  if event.author
+            | 
+            | by #[a(href=`/users/${event.author.id}`)= event.author.name]
+      p.card-text
+        .tags.badges
+  		  each tag in event.tags
+            span.badge.badge-phill.badge-secondary= tag
+      a.card-link(href='#') Card link
+      a.card-link(href='#') Another link
