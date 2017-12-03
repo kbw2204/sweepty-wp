@@ -1,5 +1,4 @@
 extends ../layout
-
 include ../includes/_paginate
 
 block content
@@ -9,7 +8,7 @@ block content
       input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
 
     h1.main-title 
-      | Events for you
+      | 내 이벤트 관리하기
       if events.total > 0
         .small Total #{events.total} event(s)
 
@@ -19,7 +18,7 @@ block content
       .events
         each event in events.docs
           .events
-            //- a.title(href=`/events/${event._id}`)= event.title
+            a.title(href=`/events/${event._id}`)= event.title
             include _event
 
       +paginate(events, '/events', {query: "???XXX&&"})

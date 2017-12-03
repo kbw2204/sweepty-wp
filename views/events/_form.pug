@@ -33,56 +33,48 @@
           option 스포츠
           option 여행
           option 기타	
+
 .form-group
-  label(for="p_num") 참가 가능 인원
-  input.form-control(type="text", name="total person number", placeholder="", value=event.total_p_num)
+  label(for="total_p_num") 참가 가능 인원
+  input(type='number', name='total_p_num', min='1', max='99999')
 .form-group
   label(for="place") 장소
-  input.form-control(type="text", name="place", placeholder="", value=event.place)
-//- .form-group
-//-   include untitled
-//- .form-group
-//-   input.form-control(type="text",name="starttime", value=event.starttime)
-//- script.
-//-   $('#sandbox-container input').datepicker({
-//-     maxViewMode: 2,
-//-     todayBtn: true,
-//-     language: "kr",
-//-     autoclose: true,
-//-     todayHighlight: true
-//-   });
-input(type='text', name='daterange', value='')
-script(type='text/javascript').
-  $(function() {
-    $('input[name="daterange"]').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-      format: 'MM/DD/YYYY h:mm A'
-    }
-  });
-  });
+  input.form-control(type="text", name="place", placeholder="")
+.form-group
+  label(for="daterange") 시작 시간 ~ 종료 시간 선택
+  |
+  input(type='text', name='daterange')
+  script(type='text/javascript').
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+        format: 'YYYY/MM/DD h:mm A'
+      }
+    });
+    });
 .container
   .row
     .col-12
       label(for="cost") 이벤트 가격
-    .col-3
+    .col-6
       .form-check
-        label.form-check-label
-          input#costFree.form-check-input(type="radio" name="exampleRadios" checked="" value =event.cost)
-          |             FREE
+        label.form-check-label FREE
+          input#costFree.form-check-input(type="radio" name="exampleRadios" checked="")
+          //- input#disabledTextInput.form-control(type='number', name='cost',placeholder='Disabled input', value='0',min='0',max='0')
 
-    .col-3
+    .col-6
       .form-check
         .input-group
           span.input-group-addon
             input#cost(type="radio" name="exampleRadios")
-          input.form-control(type="text" aria-label="How about the cost?" value =event.cost)
-          span.input-group-addon 원
+            input(type='number', name='cost', min='0', max='999999')
+            span.input-group-addon 원
 
 .form-group
   label(for="content") Contents
-  textarea.form-control(name="content", rows="10")= event.content
+  textarea.form-control(name="content", rows="10")
 
 .form-group
   label(for="tags") Tags

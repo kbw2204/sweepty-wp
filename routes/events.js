@@ -51,6 +51,10 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 //참가 신청 get
 router.get('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
+  if (event.total_p_num == 0) {
+    req.flash('danger','참가신청이 마감되었습니다!');
+    res.redirect('back');
+  }
   res.render('events/participate', {event: event});
 }));
 
@@ -58,7 +62,10 @@ router.get('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.session.user;
   const event = await Events.findById(req.params.id);
+  event.total_p_num--;
   event.members = user._id;
+  event.company = req.body.company;
+  event.reason = req.body.reason;
   await event.save();
   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
   res.redirect('/events');
@@ -86,8 +93,9 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   event.group_name = req.body.group_name,
   event.about_group = req.body.about_group,
   event.place = req.body.place,
-  event.starttime = req.body.starttime,
-  event.endtime = req.body.endtime,
+  // event.starttime = req.body.starttime,
+  // event.endtime = req.body.endtime,
+  event.daterange = req.body.daterange,
   event.total_p_num = req.body.total_p_num,
   // event. = req.body,
   event.eventtype = req.body.eventtype,
@@ -112,9 +120,10 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     content: req.body.content,
     tags: req.body.tags.split(" ").map(e => e.trim()),
     cost: req.body.cost,
-    pnum: req.body.total_p_num,
-    starttime: req.body.starttime,
-    endtime: req.body.endtime,
+    total_p_num: req.body.total_p_num,
+    // starttime: req.body.starttime,
+    // endtime: req.body.endtime,
+    daterange: req.body.daterange,
     place: req.body.place,
     group_name: req.body.group_name,
     about_group: req.body.about_group,
@@ -122,17 +131,37 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     eventtopic: req.body.eventtopic,
   });
   await event.save();
+
   req.flash('success', 'Successfully posted');
   res.redirect('/events');
 }));
-//참가신청
-router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
-  event.members = user._id;
-  await event.save();
-  req.flash('success', '성공적으로 참가신청을 완료했습니다.');
-  res.redirect('/events');
-}));
+//참가신청 원본입니다.
+// router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
+//   const user = req.session.user;
+//   event.members = user._id;
+//   await event.save();
+//   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
+//   res.redirect('/events');
+// }));
+
+//참가신청 테스트입니다.
+// router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
+//   const user = req.session.user;
+//   const finduser = await Events.findById(req.params.id);
+//   if (!finduser) {
+//     req.flash('리스트안에 없네염');
+//   }
+//   else{
+//     req.flash('이미 등록됨ㅇㅇ');
+//   }
+//   // event.members = user._id;
+//   // event.total_p_num++;
+//   // await event.save();
+//   // req.flash('success', '성공적으로 참가신청을 완료했습니다.');
+//   res.redirect('/events');
+// }));
+//star표시
+
 // needAuth는 미들웨어
 router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   const user = req.session.user;

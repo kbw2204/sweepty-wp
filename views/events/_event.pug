@@ -1,15 +1,22 @@
-.tags.badges
-  each tag in event.tags
-    span.badge.badge-phill.badge-secondary= tag
-    | 
-.row
-  .col-sm
-    .numbers.
-      #[span.number.num-votes= event.numLikes] likes,
-      #[span.number.num-views= event.numReads] reads
-  .col-sm
-    .author
-      | register on #{moment(event.createdAt).format('YYYY-MM-DD')}
-      if event.author
-        | 
-        | by #[a(href=`/users/${event.author.id}`)= event.author.name] 
+.card
+  .card-header
+    a.group_name(href=`/events/${event._id}`)= event.group_name
+  .card-body
+    blockquote.blockquote.mb-0
+      a.title(href=`/events/${event._id}`)= event.title
+      footer.blockquote-footer
+        .tags.badges
+          each tag in event.tags
+            span.badge.badge-phill.badge-secondary= tag
+            | 
+        .row
+          .col-sm
+            .numbers.
+              #[span.number.num-votes= event.numLikes] likes,
+              #[span.number.num-views= event.numReads] reads
+          .col-sm
+            .author
+              | register on #{moment(event.createdAt).format('YYYY-MM-DD')}
+              if event.author
+                | 
+                | by #[a(href=`/users/${event.author.id}`)= event.author.name] 

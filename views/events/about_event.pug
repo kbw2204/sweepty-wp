@@ -1,12 +1,32 @@
 .event.show
   h2.main-title= event.title
+
+  h4 등록 조직이름:
   .group_name= event.group_name
+  h4 조직 설명:
   .about_group= event.about_group
-  .eventtype= event.eventtype
-  .eventtopic= event.eventtopic
-  .cost= event.cost
-  .total = event.total_p_num
+  .container
+    .row
+      .col-6
+        h4 이벤트 종류
+        .eventtype= event.eventtype
+      .col-6
+        h4 이벤트 주제
+        .eventtopic= event.eventtopic
+      .col-6
+        h4 시간
+        .daterange = event.daterange
+      .col-6
+        h4 가격
+        .cost= event.cost
+  h4 장소
+  .place = event.place
+  
+  h4 참가 가능 인원
+  .total_p_num = event.total_p_num
+  h4 이벤트 설명
   .content= event.content
+  
 
   //- include _event
 
