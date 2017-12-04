@@ -39,6 +39,15 @@ router.get('/', catchErrors(async (req, res, next) => {
   res.render('Events/index', {events: events, term: term});
 }));
 
+// 내가 만든 이벤트 참가리스트 확인
+router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
+  const event = await Events.findById(req.params.id);
+  const user = req.session.user;
+  if (event.author == user._id) {
+    res.render('users/show', {event: event});
+  }
+}));
+
 router.get('/new', needAuth, (req, res, next) => {
   res.render('events/new', {event: {}});
 });
@@ -71,6 +80,7 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
   res.redirect('/events');
 }));
 
+
 router.get('/:id', catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id).populate('author');
   const comments = await Comment.find({event: event.id}).populate('author');
@@ -93,8 +103,6 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   event.group_name = req.body.group_name,
   event.about_group = req.body.about_group,
   event.place = req.body.place,
-  // event.starttime = req.body.starttime,
-  // event.endtime = req.body.endtime,
   event.daterange = req.body.daterange,
   event.total_p_num = req.body.total_p_num,
   // event. = req.body,
@@ -135,32 +143,6 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   req.flash('success', 'Successfully posted');
   res.redirect('/events');
 }));
-//참가신청 원본입니다.
-// router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
-//   const user = req.session.user;
-//   event.members = user._id;
-//   await event.save();
-//   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
-//   res.redirect('/events');
-// }));
-
-//참가신청 테스트입니다.
-// router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
-//   const user = req.session.user;
-//   const finduser = await Events.findById(req.params.id);
-//   if (!finduser) {
-//     req.flash('리스트안에 없네염');
-//   }
-//   else{
-//     req.flash('이미 등록됨ㅇㅇ');
-//   }
-//   // event.members = user._id;
-//   // event.total_p_num++;
-//   // await event.save();
-//   // req.flash('success', '성공적으로 참가신청을 완료했습니다.');
-//   res.redirect('/events');
-// }));
-//star표시
 
 // needAuth는 미들웨어
 router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {

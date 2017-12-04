@@ -1,0 +1,26 @@
+extends ../layout
+include ../includes/_paginate
+
+block content
+  .container
+   
+    h1.main-title 
+      | 내 이벤트 관리하기
+      
+      if events.total > 0
+        .small Total #{events.total} event(s)
+
+    if events.total <= 0 
+      .alert.alert-info No events available yet
+    else
+      .events
+        each event in events.docs
+          .events
+            a.title(href=`/events/${event._id}`)= event.title
+            include _memberInfo
+
+      +paginate(events, '/events', {query: "???XXX&&"})
+      
+
+    hr
+    a.btn.btn-primary(href='/events/new') Create Events

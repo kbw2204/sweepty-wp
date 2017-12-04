@@ -3,12 +3,10 @@ include ../includes/_paginate
 
 block content
   .container
-    form.form-inline.search-input-group(action='/events', method='GET')
-      i.fa.fa-search
-      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
-
+   
     h1.main-title 
       | 내 이벤트 관리하기
+      
       if events.total > 0
         .small Total #{events.total} event(s)
 
