@@ -8,7 +8,7 @@ function needAuth(req, res, next) {
     } else if (req.session.user) {
       next();
     } else {
-      req.flash('danger', 'Please signin first.');
+      req.flash('danger', '로그인이 필요합니다.');
       res.redirect('/signin');
     }
 }
@@ -20,34 +20,43 @@ function validateForm(form, options) {
   email = email.trim();
 
   if (!name) {
-    return 'Name is required.';
+    return '이름을 입력해주세요.';
   }
 
   if (!email) {
-    return 'Email is required.';
+    return '이메일을 입력해주세요.';
   }
 
   if (!form.password && options.needPassword) {
-    return 'Password is required.';
+    return '비밀번호를 입력해주세요.';
   }
 
   if (form.password !== form.password_confirmation) {
-    return 'Passsword do not match.';
+    return '비밀번호가 일치하지 않습니다.';
   }
 
   if (form.password.length < 6) {
-    return 'Password must be at least 6 characters.';
+    return '비밀번호는 6자 이상이어야 합니다.';
   }
 
   return null;
 }
 /* GET users listing. */
 router.get('/', needAuth, (req, res, next) => {
+  const user = req.session.user;
   User.find({}, function(err, users) {
+
     if (err) {
       return next(err);
     }
-    res.render('users/index', {users: users});
+    if (user._id == '5a2199ca3a84f50d51bf3c68') { //관리자만 가능하도록
+      res.render('users/index', {users: users});
+    }
+    else{
+      req.flash('danger','유저리스트를 열람할 권한이 없습니다! 관리자만 가능합니다.');
+      res.redirect('back');
+      
+    }
   }); // TODO: pagination?
 });
 
@@ -76,12 +85,12 @@ router.put('/:id', needAuth, (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash('danger', 'Not exist user.');
+      req.flash('danger', '존재하지 않는 아아디입니다.');
       return res.redirect('back');
     }
 
     if (user.password !== req.body.current_password) {
-      req.flash('danger', 'Password is incorrect');
+      req.flash('danger', '비밀번호가 일치하지 않습니다.');
       return res.redirect('back');
     }
 
@@ -95,7 +104,7 @@ router.put('/:id', needAuth, (req, res, next) => {
       if (err) {
         return next(err);
       }
-      req.flash('success', 'Updated successfully.');
+      req.flash('success', '성공적으로 수정했습니다.');
       res.redirect('/users');
     });
   });
@@ -106,7 +115,7 @@ router.delete('/:id', needAuth, (req, res, next) => {
     if (err) {
       return next(err);
     }
-    req.flash('success', 'Deleted Successfully.');
+    req.flash('success', '성공적으로 삭제했습니다!');
     res.redirect('/users');
   });
 });
@@ -131,7 +140,7 @@ router.post('/', (req, res, next) => {
       return next(err);
     }
     if (user) {
-      req.flash('danger', 'Email address already exists.');
+      req.flash('danger', '이메일이 이미 존재합니다. 다른 이메일로 시도하세요.');
       res.redirect('back');
     }
     var newUser = new User({
@@ -144,7 +153,7 @@ router.post('/', (req, res, next) => {
       if (err) {
         return next(err);
       } else {
-        req.flash('success', 'Registered successfully. Please sign in.');
+        req.flash('success', '성공적으로 등록했습니다! 다시 로그인해주세요 :)');
         res.redirect('/');
       }
     });
