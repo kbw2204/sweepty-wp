@@ -13,7 +13,7 @@ function needAuth(req, res, next) {
     } else if (req.session.user) {
       next();
     } else {
-      req.flash('danger', 'Please signin first.');
+      req.flash('danger', '로그인이 필요합니다.');
       res.redirect('/signin');
     }
 }
@@ -40,21 +40,35 @@ router.get('/', catchErrors(async (req, res, next) => {
 }));
 
 // 내가 만든 이벤트 참가리스트 확인
-// router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
-//   const event = await Events.findById(req.params.id);
-//   const user = req.session.user;
-//   if (event.author == user._id) {
-//     res.render('users/show', {event: event});
-//   }
-// }));
+router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
+  const event = await Events.findById(req.params.id);
+  const user = req.session.user;
+  if (event.author == user._id) {
+    res.render('events/memberlist', {event: event});
+  }
+  else{
+    req.flash('danger','신청자를 열람할 권한이 없습니다! 관리자만 가능합니다.');
+    res.redirect('back');
+  }
+}));
 
 router.get('/new', needAuth, (req, res, next) => {
   res.render('events/new', {event: {}});
 });
+
 //수정클릭 시 get
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
-  res.render('events/edit', {event: event});
+  const user = req.session.user;
+
+  if (event.author == user._id) {
+    res.render('events/edit', {event: event});
+  }
+  else{
+    req.flash('danger','수정할 권한이 없습니다! 관리자만 가능합니다.');
+    res.redirect('back');
+  }
+
 }));
 
 //참가 신청 get
@@ -72,9 +86,9 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
   const user = req.session.user;
   const event = await Events.findById(req.params.id);
   event.total_p_num--;
-  event.members = user._id;
-  event.company = req.body.company;
-  event.reason = req.body.reason;
+  event.members.push(user._id);
+  event.company.push(req.body.company);
+  event.reason.push(req.body.reason);
   await event.save();
   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
   res.redirect('/events');
@@ -93,7 +107,7 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
 
   if (!event) {
-    req.flash('danger', 'Not exist event');
+    req.flash('danger', '이벤트가 존재하지 않습니다.');
     return res.redirect('back');
   }
   event.title = req.body.title;
@@ -110,14 +124,24 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   event.eventtopic = req.body.eventtopic;
 
   await event.save();
-  req.flash('success', 'Successfully updated');
+  req.flash('success', '성공적으로 수정했습니다.');
   res.redirect('/events');
 }));
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-  await Events.findOneAndRemove({_id: req.params.id});
-  req.flash('success', 'Successfully deleted');
-  res.redirect('/events');
+  // await Events.findOneAndRemove({_id: req.params.id});
+  const event = await Events.findById(req.params.id);
+  const user = req.session.user;
+  if (event.author == user._id) {
+    await Events.findOneAndRemove({_id: req.params.id});
+    req.flash('success', 'Successfully deleted');
+    res.redirect('/events');
+  }
+  else{
+    req.flash('danger','삭제할 권한이 없습니다! 관리자만 가능합니다.');
+    res.redirect('back');
+  }
+
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {

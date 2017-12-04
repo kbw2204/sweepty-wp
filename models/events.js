@@ -18,8 +18,8 @@ var schema = new Schema({
   about_group : {type: String,trim: true, required: true},
   eventtype : {type: String,trim: true, required: true},
   eventtopic: {type: String,trim: true, required: true},
-  company: {type: String,trim: true},
-  reason: {type: String,trim: true},
+  company: [{type: String,trim: true}],
+  reason: [{type: String,trim: true}],
   members: [{type: Schema.Types.ObjectId, ref: 'User'}],
   numReads: {type: Number, default: 0},
   createdAt: {type: Date, default: Date.now}
