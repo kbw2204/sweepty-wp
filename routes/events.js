@@ -40,13 +40,13 @@ router.get('/', catchErrors(async (req, res, next) => {
 }));
 
 // 내가 만든 이벤트 참가리스트 확인
-router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
-  const event = await Events.findById(req.params.id);
-  const user = req.session.user;
-  if (event.author == user._id) {
-    res.render('users/show', {event: event});
-  }
-}));
+// router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
+//   const event = await Events.findById(req.params.id);
+//   const user = req.session.user;
+//   if (event.author == user._id) {
+//     res.render('users/show', {event: event});
+//   }
+// }));
 
 router.get('/new', needAuth, (req, res, next) => {
   res.render('events/new', {event: {}});
