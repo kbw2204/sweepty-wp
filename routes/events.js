@@ -153,8 +153,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     tags: req.body.tags.split(" ").map(e => e.trim()),
     cost: req.body.cost,
     total_p_num: req.body.total_p_num,
-    // starttime: req.body.starttime,
-    // endtime: req.body.endtime,
+    num_of_members: req.body.total_p_num,
     daterange: req.body.daterange,
     place: req.body.place,
     group_name: req.body.group_name,
@@ -164,7 +163,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   });
   await event.save();
 
-  req.flash('success', 'Successfully posted');
+  req.flash('success', '이벤트를 성공적으로 등록했습니다!');
   res.redirect('/events');
 }));
 
@@ -174,7 +173,7 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
 
   if (!event) {
-    req.flash('danger', 'Not exist events');
+    req.flash('danger', '이벤트가 존재하지 않습니다.');
     return res.redirect('back');
   }
 

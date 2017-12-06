@@ -1,28 +1,56 @@
 extends ../layout
+
 include ../includes/_paginate
 
 block content
   .container
-   
-    h1.main-title 
-      | 이벤트 참석자 리스트
     
-      //- if events.member.total > 0
-      //-   .small Total #{events.member.total} event(s)
+    h1.main-title 
+      | Events for you
+      if events.total > 0
+        .small Total #{events.total} event(s)
 
-    //- if events.members <= 0 
-    //-   .alert.alert-info 참가신청한 사람이 없습니다.
-    //- else
+    if events.total <= 0 
+      .alert.alert-info No events available yet
+    else
+      .events
+        each member in events.members.docs
+          .event
+            .id = memeber._id
+            .name = member.name
+            //- include _event
+            .
 
-    .events
-      each member in event.members
-        .events
-          .member = member
-            
-            
-
-    +paginate(events, '/events/:id/memberlist', {query: "???XXX&&"})
+      +paginate(events, '/events', {query: "???XXX&&"})
       
 
     hr
     a.btn.btn-primary(href='/events/new') Create Events
+//- extends ../layout
+//- include ../includes/_paginate
+
+//- block content
+//-   .container
+   
+//-     h1.main-title 
+//-       | 이벤트 참석자 리스트
+    
+//-       //- if events.member.total > 0
+//-       //-   .small Total #{events.member.total} event(s)
+
+//-     //- if events.members <= 0 
+//-     //-   .alert.alert-info 참가신청한 사람이 없습니다.
+//-     //- else
+
+//-     .events
+//-       each member in event.members
+//-         .events
+//-           .member = member
+            
+            
+
+//-     +paginate(events, '/events/:id/memberlist', {query: "???XXX&&"})
+      
+
+//-     hr
+//-     a.btn.btn-primary(href='/events/new') Create Events

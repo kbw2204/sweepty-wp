@@ -1,31 +1,47 @@
-.event.show
-  h2.main-title= event.title
+.container
+  .row
+    .col-4
+      .event.show
+        .card
+          ul.list-group.list-group-flush
+            li.list-group-item 
+              h5 등록그룹명
+              .group_name= event.group_name
+            li.list-group-item
+              h5 그룹 설명
+              .about_group= event.about_group
+            li.list-group-item
+              h5 이벤트 종류
+              .eventtype= event.eventtype
+            li.list-group-item
+              h5 이벤트 주제
+              .eventtopic= event.eventtopic
+            li.list-group-item
+              h5 시간
+              .daterange= event.daterange
+            li.list-group-item 
+              h5 가격
+              if(event.cost==null)
+                .cost Free
+              else
+                .cost= event.cost
+              
+            li.list-group-item 
+              h5 장소
+              .place= event.place
+            li.list-group-item
+              h5 참가 가능 인원
+              .total_p_num= event.total_p_num
+              h4 /
+              .num_of_members= event.num_of_members
 
-  h4 등록 조직이름:
-  .group_name= event.group_name
-  h4 조직 설명:
-  .about_group= event.about_group
-  .container
-    .row
-      .col-6
-        h4 이벤트 종류
-        .eventtype= event.eventtype
-      .col-6
-        h4 이벤트 주제
-        .eventtopic= event.eventtopic
-      .col-6
-        h4 시간
-        .daterange = event.daterange
-      .col-6
-        h4 가격
-        .cost= event.cost
-  h4 장소
-  .place = event.place
-  
-  h4 참가 가능 인원
-  .total_p_num = event.total_p_num
-  h4 이벤트 설명
-  .content= event.content
+    .col-8    
+      .card
+        ul.list-group.list-group-flush
+          li.list-group-item 
+            h4 이벤트 설명
+            .content= event.content
+
   
 
   //- include _event

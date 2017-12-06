@@ -13,6 +13,7 @@ var schema = new Schema({
   stars : {type: Number, default: 0},
   stars_people: [{type: Schema.Types.ObjectId, ref: 'User'}],
   total_p_num: {type: Number,required:true},
+  num_of_members: {type: Number},
   cost: {type: Number, default: 0},
   group_name : {type: String,trim: true, required: true},
   about_group : {type: String,trim: true, required: true},
