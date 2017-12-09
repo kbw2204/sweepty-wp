@@ -1,7 +1,7 @@
 const express = require('express');
 const Events = require('../models/events');
 const User = require('../models/user'); 
-const Comment = require('../models/comments'); 
+// const Question = require('../models/questions'); 
 const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const multer = require('multer');
@@ -41,7 +41,18 @@ router.get('/', catchErrors(async (req, res, next) => {
   });
   res.render('events/index', {events: events, term: term});
 }));
-
+// star
+router.post('/:id/star', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.session.user;
+  const event = await Events.findById(req.params.id);
+  event.stars++;
+  event.stars_people.push(user.name);
+  user.star_id.push(event._id);
+  user.star_event_name.push(event.name);
+  await event.save();
+  req.flash('success', '이 이벤트를 내 star에 등록했습니다.');
+  res.redirect('/event/:id');
+}));
 // 내가 만든 이벤트 참가리스트 확인
 router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
@@ -88,10 +99,6 @@ router.get('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.session.user;
   const event = await Events.findById(req.params.id);
-  event.total_p_num--;
-  // event.members.push(user._id);
-  event.m_name.push(user.name);
-  event.m_email.push(user.email);
   event.company.push(req.body.company);
   event.reason.push(req.body.reason);
   await event.save();
@@ -101,10 +108,10 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id).populate('author');
-  const comments = await Comment.find({event: event.id}).populate('author');
+  // const questions = await Questions.find({event: event.id}).populate('author');
   event.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
   await event.save();
-  res.render('events/show', {event: event, comments: comments});
+  res.render('events/show', {event: event});
 }));
 
 router.post('/:id', catchErrors(async (req, res, next) => {
@@ -168,30 +175,5 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   res.redirect('/events');
 }));
 
-// needAuth는 미들웨어
-router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
-  const event = await Events.findById(req.params.id);
-
-  if (!event) {
-    req.flash('danger', '이벤트가 존재하지 않습니다.');
-    return res.redirect('back');
-  }
-
-  var comment = new Comment({
-    author: user._id,
-    event: event._id,
-    content: req.body.content
-  });
-  // 이 코드는 잠재적인 오류를 가지고 있다.
-  // 많은 사람이 들어왔을 때가 문제 들어왔을 땐 0이었는데 그 때 두사람이 들어온 경우.... 
-  // 근데 우리꺼에서는 신경쓰지 않겠다.
-  await comment.save();
-  event.numComments++;
-  await event.save();
-
-  req.flash('success', 'Successfully commented');
-  res.redirect(`/events/${req.params.id}`);
-}));
 
 module.exports = router;

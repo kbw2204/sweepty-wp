@@ -6,13 +6,11 @@ block content
 
     .buttons
       a.btn.btn-primary.btn-block(href=`/events/${event.id}/participate`) 참가하기
-      //- button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
-      //- | 
       a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
       | 
       a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/events/${event.id}?_method=delete`) Delete
-      a.btn.btn-outline-primary.btn-block(href=`/events/${event.id}/memberlist`) 멤버리스트 보기
-
+      |
+      a.btn.btn-outline-primary(href=`/events/${event.id}/memberlist`) 멤버리스트 보기
     ul#myTab.nav.nav-tabs(role="tablist")
       li.nav-item
         a#home-tab.nav-link.active(data-toggle="tab" href="#about" role="tab" aria-controls="home" aria-selected="true") 모임 상세 정보
@@ -28,8 +26,8 @@ block content
         include about_event
       #comment.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
         //- include _comment
-        h1 큐앤에이
+        //- include ../questions/index
       #review.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
-        h1 리뷰입니다.
+        //- include _review
 
 

@@ -8,7 +8,8 @@ var schema = new Schema({
   password: {type: String},
   facebook: {id:String,token:String,photo:String},
   createdAt: {type: Date, default: Date.now},
-  stars : [{type: Schema.Types.ObjectId, ref: 'Event'}],
+  stars_id : [{type: Schema.Types.ObjectId, ref: 'Event'}],
+  star_event_name: [{type: String}],
 }, {
   toJSON: { virtuals: true},
   toObject: {virtuals: true}

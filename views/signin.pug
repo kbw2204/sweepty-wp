@@ -20,9 +20,11 @@ block content
             input(type="checkbox", value="remember-me")
             |
             | Remember me
-        button.btn.btn-primary.btn-block(type='submit') Signin
+        //- button.btn.btn-primary.btn-block(type='submit') Signin
         .container
           .row
+            .col-6
+              button.btn.btn-primary.btn-block(type='submit') Signin
             .col-6
               a.btn.btn-primary.btn-block(href='/auth/facebook')
                 i.fa.fa-facebook.fa-lg

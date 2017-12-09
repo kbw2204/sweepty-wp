@@ -14,7 +14,8 @@ var passport = require('passport');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var event = require('./routes/events');
-// var comments = require('./routes/comments');
+// var question = require('./routes/questions');
+// var reviews = require('./routes/reviews');
 var passportConfig = require('./lib/passport-config');
 
 var app = express();
@@ -95,6 +96,7 @@ passportConfig(passport);
 app.use('/', index);
 app.use('/users', users);
 app.use('/events', event);
+// app.user('/questions',question);
 // app.use('/ticekts',tickets);
 require('./routes/auth')(app, passport);
 
