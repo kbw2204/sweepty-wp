@@ -1,6 +1,6 @@
 .container
   .row
-    .col-4
+    .col-lg-4.col-sm-12
       .event.show
         .card
           ul.list-group.list-group-flush
@@ -36,14 +36,15 @@
             //-   h5 사진
             //-   .img= event.img
 
-    .col-8    
+    .col-lg-8.col-sm-12    
       .card
         ul.list-group.list-group-flush
           li.list-group-item 
             h4 이벤트 설명
             .content= event.content
 
-  
+    .col-8
+      a.btn.btn-success(href=`/events`) 목록으로
 
   //- include _event
 
