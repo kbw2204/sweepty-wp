@@ -4,6 +4,9 @@ const User = require('../models/user');
 const Comment = require('../models/comments'); 
 const catchErrors = require('../lib/async-error');
 const router = express.Router();
+const multer = require('multer');
+const fs = require('fs-extra');
+const path = require('path');
 
 
 // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
@@ -96,7 +99,6 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
   res.redirect('/event/:id');
 }));
 
-
 router.get('/:id', catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id).populate('author');
   const comments = await Comment.find({event: event.id}).populate('author');
@@ -107,7 +109,6 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 
 router.post('/:id', catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
-
   if (!event) {
     req.flash('danger', '이벤트가 존재하지 않습니다.');
     return res.redirect('back');
@@ -146,7 +147,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 }));
 
-router.post('/', needAuth, catchErrors(async (req, res, next) => {
+router.post('/', needAuth,catchErrors(async (req, res, next) => {
   const user = req.session.user;
   var event = new Events({
     title: req.body.title,
@@ -163,6 +164,13 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     eventtype: req.body.eventtype,
     eventtopic: req.body.eventtopic,
   });
+  // if (req.file) {
+  //   const dest = path.join(__dirname, '../public/images/uploads/'); 
+  //   console.log("File ->", req.file);
+  //   const filename = question.id + "/" + req.file.originalname;
+  //   await fs.move(req.file.path, dest + filename);
+  //   question.img = "/images/uploads/" + filename;
+  // }
   await event.save();
 
   req.flash('success', '이벤트를 성공적으로 등록했습니다!');

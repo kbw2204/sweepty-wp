@@ -18,7 +18,7 @@
     "debug": "~2.6.9",
     "express": "^4.15.5",
     "express-session": "^1.15.6",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^4.0.3",
     "method-override": "^2.3.10",
     "moment": "^2.19.1",
     "mongoose": "^4.12.4",

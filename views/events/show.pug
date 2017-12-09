@@ -23,6 +23,8 @@ block content
           
     #myTabContent.tab-content
       #about.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="home-tab")
+        if event.img
+          img.img-fluid(src= event.img)
         include about_event
       #comment.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
         //- include _comment

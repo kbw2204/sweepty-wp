@@ -3,6 +3,6 @@ extends ../layout
 block content
   .container
     h1.main-title Create Event
-    form(action="/events", method="POST")
+    form(action="/event",method="POST",enctype="multipart/form-data")
       include _form
       button.btn.btn-outline-primary(type="이벤트 생성") Create Your Event
