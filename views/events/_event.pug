@@ -12,8 +12,8 @@
         .row
           .col-sm
             .numbers.
-              #[span.number.num-votes= event.numLikes] likes,
-              #[span.number.num-views= event.numReads] reads
+              #[span.number.num-votes= event.total_p_num] 명 신청 가능,
+              #[span.number.num-views= event.numReads] 조회됨
           .col-sm
             .author
               | register on #{moment(event.createdAt).format('YYYY-MM-DD')}

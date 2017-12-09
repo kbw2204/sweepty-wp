@@ -122,7 +122,6 @@ router.post('/:id', catchErrors(async (req, res, next) => {
   event.place = req.body.place,
   event.daterange = req.body.daterange,
   event.total_p_num = req.body.total_p_num,
-  // event. = req.body,
   event.eventtype = req.body.eventtype,
   event.eventtopic = req.body.eventtopic;
 
@@ -147,7 +146,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 }));
 
-router.post('/', needAuth,catchErrors(async (req, res, next) => {
+router.post('/', needAuth, catchErrors(async (req, res, next) => {
   const user = req.session.user;
   var event = new Events({
     title: req.body.title,
@@ -164,15 +163,7 @@ router.post('/', needAuth,catchErrors(async (req, res, next) => {
     eventtype: req.body.eventtype,
     eventtopic: req.body.eventtopic,
   });
-  // if (req.file) {
-  //   const dest = path.join(__dirname, '../public/images/uploads/'); 
-  //   console.log("File ->", req.file);
-  //   const filename = question.id + "/" + req.file.originalname;
-  //   await fs.move(req.file.path, dest + filename);
-  //   question.img = "/images/uploads/" + filename;
-  // }
   await event.save();
-
   req.flash('success', '이벤트를 성공적으로 등록했습니다!');
   res.redirect('/events');
 }));
