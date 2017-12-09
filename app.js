@@ -13,7 +13,7 @@ var passport = require('passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var events = require('./routes/events');
+var event = require('./routes/events');
 // var comments = require('./routes/comments');
 var passportConfig = require('./lib/passport-config');
 
@@ -94,7 +94,7 @@ passportConfig(passport);
 // Route
 app.use('/', index);
 app.use('/users', users);
-app.use('/events', events);
+app.use('/events', event);
 // app.use('/ticekts',tickets);
 require('./routes/auth')(app, passport);
 
