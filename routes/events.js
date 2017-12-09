@@ -57,7 +57,7 @@ router.post('/:id/star', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
   const user = req.session.user;
-  if (event.author == user._id) {
+  if (event.author == user._id || user.id == '5a2199ca3a84f50d51bf3c68') {
     res.render('events/memberlist', {event: event});
   }
   else{
@@ -75,7 +75,7 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const event = await Events.findById(req.params.id);
   const user = req.session.user;
 
-  if (event.author == user._id) {
+  if (event.author == user._id || user.id == '5a2199ca3a84f50d51bf3c68') {
     res.render('events/edit', {event: event});
   }
   else{
@@ -147,7 +147,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
     res.redirect('/events');
   }
   else{
-    req.flash('danger','삭제할 권한이 없습니다! 개설자와 관리자만 가능합니다.');
+    req.flash('danger','삭제할 권한이 없습니자! 개설자와 관리자만 가능합니다.');
     res.redirect('back');
   }
 
