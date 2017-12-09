@@ -99,6 +99,8 @@ router.get('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.session.user;
   const event = await Events.findById(req.params.id);
+  event.m_name.push(user.name);
+  event.m_email.push(user.email);
   event.company.push(req.body.company);
   event.reason.push(req.body.reason);
   await event.save();
