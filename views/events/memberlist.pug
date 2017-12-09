@@ -8,13 +8,18 @@ block content
     h1.main-title 참가자 리스트 확인
     .container
       .row
-        .col-6
+        .col-3
           each name in event.m_name
             .name= name
-        .col-6
+        .col-3
           each email in event.m_email
             .email= email
-
+        .col-3
+          each company in event.company
+            .name= company
+        .col-3
+          each reason in event.reason
+            .email= reason
 
           
       
