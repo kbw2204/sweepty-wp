@@ -21,7 +21,9 @@ var schema = new Schema({
   eventtopic: {type: String,trim: true, required: true},
   company: [{type: String,trim: true}],
   reason: [{type: String,trim: true}],
-  members: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  // members: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  m_name: [{type: String,trim: true}],
+  m_email: [{type: String,trim: true}],
   numReads: {type: Number, default: 0},
   createdAt: {type: Date, default: Date.now}
 }, {

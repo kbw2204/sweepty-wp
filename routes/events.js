@@ -86,12 +86,14 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
   const user = req.session.user;
   const event = await Events.findById(req.params.id);
   event.total_p_num--;
-  event.members.push(user._id);
+  // event.members.push(user._id);
+  event.m_name.push(user.name);
+  event.m_email.push(user.email);
   event.company.push(req.body.company);
   event.reason.push(req.body.reason);
   await event.save();
   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
-  res.redirect('/events');
+  res.redirect('/event/:id');
 }));
 
 
