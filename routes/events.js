@@ -39,7 +39,7 @@ router.get('/', catchErrors(async (req, res, next) => {
     populate: 'author', 
     page: page, limit: limit
   });
-  res.render('Events/index', {events: events, term: term});
+  res.render('events/index', {events: events, term: term});
 }));
 
 // 내가 만든 이벤트 참가리스트 확인

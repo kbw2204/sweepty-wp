@@ -1,6 +1,6 @@
 extends ../layout
 
-//- include ../includes/_paginate
+include ../includes/_paginate
 
 block content
   .container
@@ -12,7 +12,7 @@ block content
       each event in events.docs
         include _event
 
-      //- +paginate(events, '/events', {query: "???XXX&&"})
+      +paginate(events, '/events', {query: "???XXX&&"})
       
 
     hr
