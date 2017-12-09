@@ -61,7 +61,7 @@ router.get('/:id/memberlist', needAuth, catchErrors(async (req, res, next) => {
     res.render('events/memberlist', {event: event});
   }
   else{
-    req.flash('danger','신청자를 열람할 권한이 없습니다! 관리자만 가능합니다.');
+    req.flash('danger','신청자를 열람할 권한이 없습니다! 개설자와 관리자만 가능합니다.');
     res.redirect('back');
   }
 }));
@@ -79,7 +79,7 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
     res.render('events/edit', {event: event});
   }
   else{
-    req.flash('danger','수정할 권한이 없습니다! 관리자만 가능합니다.');
+    req.flash('danger','수정할 권한이 없습니다! 개설자와 관리자만 가능합니다.');
     res.redirect('back');
   }
 
@@ -103,7 +103,7 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
   event.reason.push(req.body.reason);
   await event.save();
   req.flash('success', '성공적으로 참가신청을 완료했습니다.');
-  res.redirect('/event/:id');
+  res.redirect('/events');
 }));
 
 router.get('/:id', catchErrors(async (req, res, next) => {
@@ -141,13 +141,13 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   // await Events.findOneAndRemove({_id: req.params.id});
   const event = await Events.findById(req.params.id);
   const user = req.session.user;
-  if (event.author == user._id) {
+  if (event.author == user._id || user.id == '5a2199ca3a84f50d51bf3c68') {
     await Events.findOneAndRemove({_id: req.params.id});
     req.flash('success', 'Successfully deleted');
     res.redirect('/events');
   }
   else{
-    req.flash('danger','삭제할 권한이 없습니다! 관리자만 가능합니다.');
+    req.flash('danger','삭제할 권한이 없습니다! 개설자와 관리자만 가능합니다.');
     res.redirect('back');
   }
 
